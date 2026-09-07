@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="OBS — Only Born To Stand Out. A streetwear brand built for those who refuse to blend in." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23000'/><text x='32' y='44' font-family='Arial Black,sans-serif' font-size='36' font-weight='900' font-style='italic' text-anchor='middle' fill='%23FFD60A' transform='skewX(-12) translate(4 0)'>OBS</text></svg>" />
+<title>OBS — Only Born To Stand Out</title>
+<style>
+  /* ============== RESET & BASE ============== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #000;
+    color: #fff;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  :root {
+    --black: #000;
+    --white: #fff;
+    --gold: #FFD60A;   /* gold yellow */
+    --gold-dark: #E6BF00;
+    --gray-1: #111;
+    --gray-2: #1a1a1a;
+    --gray-3: #2a2a2a;
+  }
+
+  /* ============== TYPOGRAPHY ============== */
+  h1, h2, h3, h4 {
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /* ============== OBS LOGO (recreated from reference) ============== */
+  .obs-logo {
+    display: inline-block;
+    font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(70px, 14vw, 220px);
+    line-height: 0.9;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    transform: skewX(-12deg);
+    position: relative;
+    background: linear-gradient(180deg, #ffffff 0%, #d9d9d9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(255,255,255,0.05);
+    user-select: none;
+  }
+  /* motion lines on both sides of the logo */
+  .obs-logo-wrap {
+    position: relative;
+    display: inline-block;
+    padding: 0 6vw;
+  }
+  .obs-logo-wrap::before,
+  .obs-logo-wrap::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: clamp(40px, 8vw, 160px);
+    height: 3px;
+    background: var(--white);
+    transform: translateY(-50%) skewX(-20deg);
+    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+  }
+  .obs-logo-wrap::before { left: 0; }
+  .obs-logo-wrap::after { right: 0; }
+  /* secondary smaller tagline under logo */
+  .obs-motto {
+    margin-top: 1.2rem;
+    font-size: clamp(11px, 1.4vw, 18px);
+    letter-spacing: 0.5em;
+    font-weight: 600;
+    color: var(--white);
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 0 4rem;
+  }
+  .obs-motto::before,
+  .obs-motto::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 3rem;
+    height: 1px;
+    background: var(--white);
+  }
+  .obs-motto::before { left: 0; }
+  .obs-motto::after { right: 0; }
+
+  /* compact logo for the navbar */
+  .nav-logo {
+    display: inline-block;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 28px;
+    letter-spacing: -0.04em;
+    transform: skewX(-12deg);
+    color: var(--white);
+    background: linear-gradient(180deg, #fff 0%, #d9d9d9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ============== NAV ============== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.3s ease;
+  }
+  header.scrolled { background: rgba(0,0,0,0.95); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul li a {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+  nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  nav ul li a:hover { color: var(--gold); }
+  nav ul li a:hover::after { width: 100%; }
+
+  .nav-icons { display: flex; gap: 1.2rem; align-items: center; }
+  .icon-btn {
+    width: 36px; height: 36px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+  .icon-btn svg { width: 16px; height: 16px; }
+
+  .menu-toggle {
+    display: none;
+    width: 36px; height: 36px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .menu-toggle span {
+    display: block; width: 22px; height: 2px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ============== HERO ============== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at center, rgba(255,214,10,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at top, #1a1a1a 0%, #000 70%);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-top: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    margin-top: 1.5rem;
+    max-width: 540px;
+    font-size: 1rem;
+    color: #b8b8b8;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 1rem 2.4rem;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 800;
+    border: 1px solid var(--white);
+    background: var(--white);
+    color: var(--black);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn:hover { background: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--white); }
+  .btn-ghost:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+
+  /* scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .scroll-indicator .line {
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: scroll 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ============== MARQUEE ============== */
+  .marquee {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 0;
+    overflow: hidden;
+    border-top: 2px solid var(--black);
+    border-bottom: 2px solid var(--black);
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+    font-weight: 900;
+    font-size: clamp(14px, 1.6vw, 20px);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 3rem; }
+  .marquee-track .dot { width: 8px; height: 8px; background: var(--black); border-radius: 50%; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============== SECTIONS ============== */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .section-eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+  }
+  .section-link {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 4px;
+    transition: color 0.2s;
+  }
+  .section-link:hover { color: var(--gold); }
+
+  /* ============== PRODUCT GRID ============== */
+  .drops {
+    background: var(--black);
+    position: relative;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: var(--gray-1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+  }
+  .product-card:hover { transform: translateY(-6px); }
+  .product-img {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--gray-2) 0%, var(--gray-3) 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* fake product visuals using CSS */
+  .product-img .garment {
+    width: 60%;
+    height: 70%;
+    background: var(--white);
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+  .product-card:hover .garment { transform: scale(1.05) rotate(-2deg); }
+  .garment.hoodie {
+    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+  }
+  .garment.hoodie::before, .garment.hoodie::after {
+    content: ""; position: absolute; top: 8%; width: 20%; height: 30%;
+    background: var(--white);
+    border-radius: 50% 0 0 50%;
+  }
+  .garment.hoodie::before { left: -10%; transform: rotate(20deg); }
+  .garment.hoodie::after { right: -10%; transform: rotate(-20deg) scaleX(-1); }
+  .garment.tee {
+    border-radius: 8px 8px 0 0;
+  }
+  .garment.tee::before, .garment.tee::after {
+    content: ""; position: absolute; top: 5%; width: 22%; height: 28%;
+    background: var(--white);
+  }
+  .garment.tee::before { left: -8%; transform: rotate(15deg); border-radius: 0 0 0 50%; }
+  .garment.tee::after { right: -8%; transform: rotate(-15deg); border-radius: 0 0 50% 0; }
+  .garment.jacket {
+    background: var(--white);
+    border-radius: 6px;
+    clip-path: polygon(0 15%, 15% 0, 85% 0, 100% 15%, 100% 100%, 0 100%);
+  }
+  .garment.jacket::before {
+    content: ""; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 100%;
+    background: var(--black);
+  }
+  .garment.pants {
+    background: var(--white);
+    clip-path: polygon(10% 0, 90% 0, 95% 100%, 55% 100%, 50% 30%, 45% 100%, 5% 100%);
+  }
+  .product-img .badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    padding: 0.3rem 0.6rem;
+    text-transform: uppercase;
+  }
+  .product-img .quick-add {
+    position: absolute;
+    bottom: 1rem; left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--white);
+    color: var(--black);
+    padding: 0.7rem 1.5rem;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover .quick-add { transform: translateX(-50%) translateY(0); }
+  .product-info {
+    padding: 1.2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .product-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .product-cat {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .product-price {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  /* ============== ABOUT / FEATURE SPLIT ============== */
+  .manifesto {
+    background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .manifesto-text h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .manifesto-text h2 em {
+    font-style: normal;
+    color: var(--gold);
+    position: relative;
+  }
+  .manifesto-text p {
+    color: #b8b8b8;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-num {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+  .manifesto-visual {
+    aspect-ratio: 4/5;
+    background: var(--gray-1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .manifesto-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,214,10,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+  .big-obs {
+    font-family: 'Arial Black', sans-serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(120px, 22vw, 320px);
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+    transform: skewX(-12deg);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    position: relative;
+    z-index: 1;
+  }
+  .manifesto-visual .corner {
+    position: absolute;
+    bottom: 1.5rem; right: 1.5rem;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  /* ============== NEWSLETTER ============== */
+  .newsletter {
+    background: var(--gold);
+    color: var(--black);
+    text-align: center;
+  }
+  .newsletter h2 {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    color: var(--black);
+    line-height: 1;
+  }
+  .newsletter p {
+    max-width: 500px;
+    margin: 1rem auto 2rem;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+  }
+  .newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid var(--black);
+    background: var(--white);
+  }
+  .newsletter-form input {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: var(--black);
+    outline: none;
+  }
+  .newsletter-form button {
+    padding: 1rem 2rem;
+    background: var(--black);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: var(--gray-3); }
+  .form-msg {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--black);
+    min-height: 1.2rem;
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    background: #050505;
+    padding: 4rem 2rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo { font-size: 36px; margin-bottom: 1rem; }
+  .footer-brand p {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-width: 320px;
+  }
+  .footer-col h4 {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.2rem;
+    color: var(--gold);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a {
+    font-size: 13px;
+    color: #aaa;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--white); }
+  .socials { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .social-link svg { width: 14px; height: 14px; }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0.1em;
+  }
+
+  /* ============== REVEAL ANIMATION ============== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 900px) {
+    .manifesto-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .manifesto-visual { aspect-ratio: 1/1; order: -1; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .stat-row { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  }
+  @media (max-width: 720px) {
+    header { padding: 0.8rem 1rem; }
+    nav ul {
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(0,0,0,0.98);
+      flex-direction: column;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    nav ul.open { max-height: 400px; }
+    nav ul li { width: 100%; }
+    nav ul li a {
+      display: block;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .menu-toggle { display: flex; }
+    .section { padding: 4rem 1rem; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form button { padding: 1rem; }
+    .obs-logo-wrap { padding: 0 8vw; }
+  }
+  @media (max-width: 480px) {
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .stat-row { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
+  /* ============== E-COMMERCE FUNCTIONAL LAYER ============== */
+  .shop-toolbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; }
+  .filter-tabs { display:flex; gap:.5rem; flex-wrap:wrap; }
+  .filter-tab { border:1px solid rgba(255,255,255,.14); padding:.55rem .85rem; font-size:10px; letter-spacing:.16em; text-transform:uppercase; font-weight:800; }
+  .filter-tab:hover,.filter-tab.active { background:var(--gold); color:#000; border-color:var(--gold); }
+  .sort-label { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#888; display:flex; gap:.6rem; align-items:center; }
+  .sort-label select { background:#111; color:#fff; border:1px solid #333; padding:.55rem; }
+  .product-card { cursor:pointer; }
+  .product-card .quick-add { z-index:3; }
+  .product-card .product-img { cursor:pointer; }
+  .product-card .product-name { display:block; }
+  .empty-state { text-align:center; color:#888; padding:4rem 0; }
+  .product-drawer,.cart-drawer,.account-drawer { position:fixed; inset:0; z-index:300; pointer-events:none; }
+  .account-drawer { z-index:350; }
+  .drawer-backdrop { position:absolute; inset:0; background:rgba(0,0,0,.72); opacity:0; transition:opacity:.25s; }
+  .drawer-panel { position:absolute; right:0; top:0; height:100%; width:min(520px,100%); background:#0b0b0b; border-left:1px solid #292929; transform:translateX(100%); transition:transform .3s ease; overflow:auto; }
+  .drawer-open, .product-drawer.drawer-open, .cart-drawer.drawer-open, .account-drawer.drawer-open { pointer-events:auto; }
+  .drawer-open .drawer-backdrop { opacity:1; }
+  .drawer-open .drawer-panel { transform:translateX(0); }
+  .drawer-head { padding:1.2rem 1.4rem; border-bottom:1px solid #222; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:#0b0b0b; z-index:2; }
+  .drawer-head h3 { font-size:14px; }
+  .close-drawer { width:36px;height:36px;border:1px solid #333;border-radius:50%;font-size:20px; }
+  .drawer-body { padding:1.4rem; }
+  .detail-visual { aspect-ratio:1/1.05; background:linear-gradient(135deg,#161616,#292929); display:flex;align-items:center;justify-content:center; margin-bottom:1.3rem; position:relative; overflow:hidden; }
+  .detail-visual .garment { width:62%; height:70%; }
+  .detail-copy h2 { font-size:2rem; margin-bottom:.35rem; }
+  .detail-copy .price { color:var(--gold); font-weight:900; font-size:1.2rem; margin:.7rem 0 1rem; }
+  .detail-copy p { color:#aaa; line-height:1.7; font-size:.9rem; }
+  .option-label { display:block; margin-top:1.2rem; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#888; margin-bottom:.6rem; }
+  .option-row { display:flex; gap:.5rem; flex-wrap:wrap; }
+  .option-btn { min-width:45px; padding:.65rem .8rem; border:1px solid #333; font-size:11px; font-weight:800; }
+  .option-btn.active { border-color:var(--gold); background:var(--gold); color:#000; }
+  .primary-wide { width:100%; margin-top:1.4rem; }
+  .cart-count { position:absolute; top:-5px; right:-5px; min-width:17px;height:17px;border-radius:50%;background:var(--gold);color:#000;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center; }
+  .icon-btn { position:relative; }
+  .cart-item { display:grid;grid-template-columns:70px 1fr auto;gap:1rem;padding:1rem 0;border-bottom:1px solid #222;align-items:center; }
+  .cart-thumb { width:70px;height:85px;background:linear-gradient(135deg,#191919,#303030);display:flex;align-items:center;justify-content:center;overflow:hidden; }
+  .cart-thumb .garment { width:58%;height:65%; }
+  .cart-item h4 { font-size:12px;margin-bottom:.25rem; }
+  .cart-item small { color:#777; }
+  .cart-item-price { color:var(--gold);font-weight:800;font-size:12px; }
+  .qty-row { display:flex;align-items:center;gap:.5rem;margin-top:.55rem; }
+  .qty-row button { width:25px;height:25px;border:1px solid #333; }
+  .qty-row span { min-width:22px;text-align:center;font-size:11px; }
+  .remove-item { color:#777;font-size:10px;text-decoration:underline;margin-top:.4rem;display:inline-block; }
+  .cart-summary { padding-top:1.3rem; }
+  .summary-line { display:flex;justify-content:space-between;padding:.35rem 0;color:#aaa;font-size:13px; }
+  .summary-line.total { color:#fff;font-size:16px;font-weight:900;border-top:1px solid #333;margin-top:.6rem;padding-top:1rem; }
+  .checkout-note { color:#777;font-size:11px;line-height:1.6;margin-top:.8rem; }
+  .checkout { margin-top:1.5rem; }
+  .checkout-grid { display:grid;grid-template-columns:1fr 1fr;gap:.8rem; }
+  .checkout-grid .full { grid-column:1/-1; }
+  .field { background:#111;border:1px solid #333;color:#fff;padding:.85rem;outline:none;width:100%; }
+  .field:focus { border-color:var(--gold); }
+  .checkout-title { margin-bottom:1rem;font-size:1.2rem; }
+  .payment-methods { display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.7rem; }
+  .payment-method { border:1px solid #333;padding:.8rem;text-align:left;font-size:11px; }
+  .payment-method.active { border-color:var(--gold); }
+  .search-overlay { position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.96);display:none;padding:7rem 1.5rem 2rem; }
+  .search-overlay.open { display:block; }
+  .search-box { max-width:850px;margin:0 auto; }
+  .search-box input { width:100%;background:transparent;border:0;border-bottom:2px solid #444;color:#fff;font-size:clamp(2rem,6vw,4rem);padding:1rem 0;outline:none; }
+  .search-results { display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem; }
+  .search-result { border:1px solid #222;padding:1rem;cursor:pointer; }
+  .search-result:hover { border-color:var(--gold); }
+  .toast { position:fixed;bottom:1.5rem;left:50%;transform:translate(-50%,120px);background:#fff;color:#000;padding:.85rem 1.2rem;font-size:11px;font-weight:800;letter-spacing:.1em;z-index:500;transition:transform .25s; }
+  .toast.show { transform:translate(-50%,0); }
+  .lookbook-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:2rem; }
+  .lookbook-shot { min-height:260px;background:linear-gradient(135deg,#111,#292929);display:flex;align-items:flex-end;padding:1rem;position:relative;overflow:hidden; }
+  .lookbook-shot::before { content:"OBS";font-family:'Arial Black';font-size:clamp(5rem,12vw,10rem);font-style:italic;opacity:.08;position:absolute;inset:auto -10% -5% auto;transform:skewX(-12deg); }
+  .lookbook-shot span { position:relative;z-index:1;font-size:10px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase; }
+  @media(max-width:720px){ .search-results,.checkout-grid,.lookbook-grid { grid-template-columns:1fr 1fr; } .drawer-panel{width:100%;} }
+  @media(max-width:480px){ .search-results,.lookbook-grid {grid-template-columns:1fr;} .shop-toolbar{align-items:flex-start;} }
+
+
+/* ============== ACCOUNT / AUTH ============== */
+.account-panel{width:min(520px,100%)}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #292929;margin-bottom:1.4rem}
+.auth-tab{padding:.9rem .5rem;text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:900;color:#777}
+.auth-tab.active{color:#fff;border-bottom:2px solid var(--gold)}
+.auth-intro{color:#888;font-size:12px;line-height:1.7;margin-bottom:1.2rem}
+.auth-form{display:grid;gap:.8rem}.auth-name-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.password-rules{font-size:10px;line-height:1.6;color:#777;margin-top:-.3rem}.password-rules.valid{color:#9cff9c}.auth-error{font-size:11px;color:#ff8585;min-height:18px}
+.account-welcome{padding:1.2rem 0 1.5rem;border-bottom:1px solid #222}.account-welcome h2{font-size:1.5rem;margin:.4rem 0}.account-welcome p{font-size:11px;color:#777}
+.account-actions{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.2rem 0 1.5rem}.history-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}.history-head h3{font-size:13px}.text-btn{font-size:10px;text-decoration:underline;color:#888}
+.order-card{border:1px solid #292929;padding:1rem;margin-bottom:.8rem}.order-top{display:flex;justify-content:space-between;gap:1rem;align-items:start}.order-id{font-weight:900;font-size:12px}.order-date{font-size:10px;color:#777;margin-top:.25rem}.order-status{font-size:9px;text-transform:uppercase;letter-spacing:.15em;padding:.35rem .5rem;border:1px solid var(--gold);color:var(--gold)}
+.order-items{margin:.9rem 0;padding:.8rem 0;border-top:1px solid #222;border-bottom:1px solid #222}.order-item-line{display:flex;justify-content:space-between;font-size:11px;color:#aaa;padding:.25rem 0}.order-total{display:flex;justify-content:space-between;font-weight:900;font-size:13px}.order-track{margin-top:.8rem;height:4px;background:#222;position:relative}.order-track span{display:block;height:100%;width:25%;background:var(--gold)}
+.account-empty{text-align:center;color:#777;font-size:12px;padding:2rem 0}.logged-badge{position:absolute;right:-5px;top:-5px;width:17px;height:17px;border-radius:50%;background:var(--gold);color:#000;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:900}
+
+/* ===== Order detail / status timeline ===== */
+.status-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin:1.1rem 0}
+.status-step{padding:.7rem .4rem;border:1px solid #292929;text-align:center;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#666}
+.status-step.done{border-color:var(--gold);color:var(--gold);background:rgba(255,214,10,.08)}
+.status-step.current{border-color:var(--gold);color:#000;background:var(--gold);font-weight:900}
+.order-items-list{margin:1rem 0}
+.order-items-list .oi-row{display:flex;justify-content:space-between;font-size:11px;color:#aaa;padding:.4rem 0;border-bottom:1px solid #1d1d1d}
+.order-meta{font-size:11px;color:#888;line-height:1.7;margin:.6rem 0}
+.admin-row{border:1px solid #292929;padding:.8rem;margin-bottom:.6rem}
+.admin-row .order-top{display:flex;justify-content:space-between;gap:.5rem;align-items:start}
+.admin-row select{background:#111;color:#fff;border:1px solid #333;padding:.45rem;font-size:11px;margin-top:.5rem;width:100%}
+.admin-row .admin-update{width:100%;padding:.55rem;margin-top:.5rem;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;background:var(--gold);color:#000;border:1px solid var(--gold)}
+.pay-badge{display:inline-block;font-size:9px;letter-spacing:.16em;padding:.25rem .5rem;border:1px solid #444;color:#aaa;text-transform:uppercase;margin-left:.4rem}
+.pay-badge.paystack{border-color:var(--gold);color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- ============== SUPABASE JS SDK ============== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ============== HEADER ============== -->
+<header id="siteHeader">
+  <a href="#top" class="nav-logo" aria-label="OBS home">OBS</a>
+  <nav>
+    <ul id="navMenu">
+      <li><a href="#drops">Drops</a></li>
+      <li><a href="#manifesto">Manifesto</a></li>
+      <li><a href="#lookbook">Lookbook</a></li>
+      <li><a href="#newsletter">Contact</a></li>
+      <li><a href="#" id="joinUsLink">Join Us</a></li>
+    </ul>
+  </nav>
+  <div class="nav-icons">
+    <button class="icon-btn" id="searchBtn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+    </button>
+    <button class="icon-btn" id="accountBtn" aria-label="Account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c.7-4 3.4-6 8-6s7.3 2 8 6"/></svg>
+    </button>
+    <button class="icon-btn" id="cartBtn" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+    </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <span class="hero-tag">New Drop — 2026</span>
+    <div class="obs-logo-wrap">
+      <div class="obs-logo">OBS</div>
+    </div>
+    <h1>Wear the <span>Outlier</span> Energy</h1>
+    <p class="hero-sub">
+      Streetwear built for the bold. OBS rejects the ordinary and dresses the
+      different. Every cut, every print, every stitch — designed to make you
+      impossible to ignore.
+    </p>
+    <div class="hero-cta">
+      <a href="#drops" class="btn">Shop the Drop</a>
+      <a href="#manifesto" class="btn btn-ghost">Our Story</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ============== MARQUEE ============== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Only Born To Stand Out <span class="dot"></span></span>
+    <span>New Drop Live <span class="dot"></span></span>
+    <span>Free Shipping Worldwide <span class="dot"></span></span>
+    <span>Limited Edition <span class="dot"></span></span>
+    <span>Only Born To Stand Out <span class="dot"></span></span>
+    <span>New Drop Live <span class="dot"></span></span>
+    <span>Free Shipping Worldwide <span class="dot"></span></span>
+    <span>Limited Edition <span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- ============== DROPS ============== -->
+<section class="drops" id="drops">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Latest Collection</div>
+        <h2 class="section-title">The Drop</h2>
+      </div>
+      <a href="#drops" class="section-link">View All →</a>
+    </div>
+
+    <div class="shop-toolbar reveal">
+      <div class="filter-tabs" id="categoryFilters" role="tablist" aria-label="Product categories">
+        <button class="filter-tab active" data-category="all">All</button>
+        <button class="filter-tab" data-category="new">New Arrivals</button>
+        <button class="filter-tab" data-category="tees">Tees</button>
+        <button class="filter-tab" data-category="hoodies">Hoodies</button>
+        <button class="filter-tab" data-category="shorts">Shorts</button>
+        <button class="filter-tab" data-category="bottoms">Bottoms</button>
+        <button class="filter-tab" data-category="outerwear">Outerwear</button>
+        <button class="filter-tab" data-category="accessories">Accessories</button>
+      </div>
+      <div class="catalog-tools">
+        <label class="sort-label">Sort
+          <select id="sortProducts" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+    <div class="empty-state" id="emptyProducts" hidden>No products found.</div>
+  </div>
+</section>
+
+<!-- ============== MANIFESTO ============== -->
+<section class="manifesto" id="manifesto">
+  <div class="container">
+    <div class="manifesto-grid">
+      <div class="manifesto-text reveal">
+        <div class="section-eyebrow">The Manifesto</div>
+        <h2>We Don't Make Clothes. We Make <em>Statements</em>.</h2>
+        <p>
+          OBS was born on the streets, fueled by the belief that what you wear
+          should shout as loud as you do. We're not here to fit in. We're here
+          to break the mold and dress a generation that refuses to fade.
+        </p>
+        <p>
+          From sketch to stitch — every piece is built with intention, edge,
+          and a refusal to be ordinary.
+        </p>
+        <div class="stat-row">
+          <div>
+            <div class="stat-num" data-target="120">0</div>
+            <div class="stat-label">Styles</div>
+          </div>
+          <div>
+            <div class="stat-num" data-target="42">0</div>
+            <div class="stat-label">Countries</div>
+          </div>
+          <div>
+            <div class="stat-num" data-target="100">0</div>
+            <div class="stat-label">K+ Sold</div>
+          </div>
+        </div>
+      </div>
+      <div class="manifesto-visual reveal" id="lookbook">
+        <span class="big-obs">OBS</span>
+        <span class="corner">EST. 2026 — A/W 26</span>
+      </div>
+
+      <div class="lookbook-grid reveal" aria-label="OBS lookbook">
+        <div class="lookbook-shot"><span>01 — OUTLIER ENERGY</span></div>
+        <div class="lookbook-shot"><span>02 — STREET FORM</span></div>
+        <div class="lookbook-shot"><span>03 — STAND OUT</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== NEWSLETTER ============== -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <div class="section-eyebrow" style="color:var(--black);">Join the Inner Circle</div>
+    <h2>Get Early Access</h2>
+    <p>Sign up for exclusive drops, restocks, delivery updates, and behind-the-scenes looks before anyone else.</p>
+    <form class="newsletter-form" id="newsletterForm" novalidate>
+      <input type="email" id="emailInput" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit">Subscribe</button>
+    </form>
+    <div class="form-msg" id="formMsg"></div>
+  </div>
+</section>
+
+
+
+<!-- ============== ACCOUNT / AUTH ============== -->
+<div class="account-drawer" id="accountDrawer" aria-hidden="true">
+  <div class="drawer-backdrop" data-close="accountDrawer"></div>
+  <aside class="drawer-panel account-panel">
+    <div class="drawer-head"><h3 id="accountTitle">Join OBS</h3><button class="close-drawer" data-close="accountDrawer" aria-label="Close">×</button></div>
+    <div class="drawer-body">
+      <div id="authView">
+        <div class="auth-tabs"><button class="auth-tab active" data-auth="signup">Create Account</button><button class="auth-tab" data-auth="login">Login</button></div>
+        <p class="auth-intro" id="authIntro">Create your OBS account to save your orders and track every purchase.</p>
+        <form id="authForm" class="auth-form" novalidate>
+          <div id="nameFields" class="auth-name-grid"><input class="field" name="firstName" placeholder="First name" autocomplete="given-name"><input class="field" name="lastName" placeholder="Last name" autocomplete="family-name"></div>
+          <input class="field full" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+          <input class="field full" type="password" name="password" placeholder="Password" autocomplete="new-password" required>
+          <div class="password-rules" id="passwordRules">Use 8+ characters with uppercase, lowercase, a number and a symbol.</div>
+          <input class="field full" id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm password" autocomplete="new-password">
+          <button class="btn primary-wide" type="submit" id="authSubmit">Create Account</button>
+          <div class="auth-error" id="authError" role="alert"></div>
+          <button type="button" class="text-btn" id="forgotPasswordBtn" hidden>Forgot password?</button>
+        </form>
+      </div>
+      <div id="forgotView" hidden>
+        <div class="history-head"><h3>Reset Password</h3><button class="text-btn" id="backToAuth">Back</button></div>
+        <p class="auth-intro" id="forgotIntro">Enter your email and we'll send you a secure link to reset your OBS password.</p>
+        <form id="forgotForm" class="auth-form" novalidate>
+          <input class="field full" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+          <button class="btn primary-wide" type="submit" id="forgotSubmit">Send Reset Link</button>
+          <div class="auth-error" id="forgotError" role="alert"></div>
+        </form>
+      </div>
+      <div id="resetView" hidden>
+        <div class="history-head"><h3>Set New Password</h3></div>
+        <p class="auth-intro">Choose a strong new password for your OBS account.</p>
+        <form id="resetForm" class="auth-form" novalidate>
+          <input class="field full" type="password" name="password" placeholder="New password" autocomplete="new-password" required>
+          <div class="password-rules" id="resetPasswordRules">Use 8+ characters with uppercase, lowercase, a number and a symbol.</div>
+          <input class="field full" type="password" name="confirmPassword" placeholder="Confirm new password" autocomplete="new-password" required>
+          <button class="btn primary-wide" type="submit" id="resetSubmit">Update Password</button>
+          <div class="auth-error" id="resetError" role="alert"></div>
+        </form>
+      </div>
+      <div id="accountView" hidden>
+        <div class="account-welcome"><span class="section-eyebrow">Member</span><h2 id="memberName">OBS Member</h2><p id="memberEmail"></p></div>
+        <div class="account-actions">
+          <button class="btn" id="historyBtn">Order History</button>
+          <button class="btn btn-ghost" id="logoutBtn">Log Out</button>
+        </div>
+        <div class="account-actions" id="adminActions" hidden>
+          <button class="btn" id="adminBtn" style="grid-column:1/-1;background:var(--gold);color:#000;border-color:var(--gold)">Admin — Manage Orders</button>
+        </div>
+        <div id="historyView" hidden>
+          <div class="history-head"><h3>Order History</h3><button class="text-btn" id="backAccount">Back</button></div>
+          <div id="orderHistoryList"></div>
+        </div>
+        <div id="orderDetailView" hidden>
+          <div class="history-head"><h3 id="orderDetailTitle">Order Details</h3><button class="text-btn" id="backHistory">Back</button></div>
+          <div id="orderDetailBody"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ============== PRODUCT DETAIL DRAWER ============== -->
+<div class="product-drawer" id="productDrawer" aria-hidden="true">
+  <div class="drawer-backdrop" data-close="productDrawer"></div>
+  <aside class="drawer-panel">
+    <div class="drawer-head"><h3>Product Details</h3><button class="close-drawer" data-close="productDrawer" aria-label="Close">×</button></div>
+    <div class="drawer-body" id="productDetail"></div>
+  </aside>
+</div>
+
+<!-- ============== CART DRAWER ============== -->
+<div class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="drawer-backdrop" data-close="cartDrawer"></div>
+  <aside class="drawer-panel">
+    <div class="drawer-head"><h3>Your Cart <span id="cartTitleCount"></span></h3><button class="close-drawer" data-close="cartDrawer" aria-label="Close">×</button></div>
+    <div class="drawer-body" id="cartBody"></div>
+  </aside>
+</div>
+
+<!-- ============== ADMIN DRAWER ============== -->
+<div class="account-drawer" id="adminDrawer" aria-hidden="true">
+  <div class="drawer-backdrop" data-close="adminDrawer"></div>
+  <aside class="drawer-panel account-panel">
+    <div class="drawer-head"><h3>OBS — Admin Orders</h3><button class="close-drawer" data-close="adminDrawer" aria-label="Close">×</button></div>
+    <div class="drawer-body">
+      <p class="auth-intro">Manage every customer order. Update order status to keep customers notified about their delivery.</p>
+      <div id="adminOrderList">Loading…</div>
+    </div>
+  </aside>
+</div>
+
+<!-- ============== SEARCH ============== -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <div class="search-box">
+    <button class="close-drawer" id="closeSearch" aria-label="Close search">×</button>
+    <input id="searchInput" type="search" placeholder="Search OBS..." autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">OBS</span>
+      <p>Only Born To Stand Out. Streetwear for the unapologetically different. Made for the streets. Built to last.</p>
+      <div class="socials">
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="https://x.com/" target="_blank" rel="noopener" class="social-link" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener" class="social-link" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.71a8.16 8.16 0 0 0 4.77 1.52V6.81a4.85 4.85 0 0 1-1.84-.12z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#drops" data-footer-action="filter:new">New Arrivals</a></li>
+        <li><a href="#drops" data-footer-action="filter:hoodies">Hoodies</a></li>
+        <li><a href="#drops" data-footer-action="filter:tees">Tees</a></li>
+        <li><a href="#drops" data-footer-action="filter:outerwear">Outerwear</a></li>
+        <li><a href="#drops" data-footer-action="filter:accessories">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#drops" data-footer-action="info:shipping">Shipping</a></li>
+        <li><a href="#drops" data-footer-action="info:returns">Returns</a></li>
+        <li><a href="#drops" data-footer-action="info:size">Size Guide</a></li>
+        <li><a href="#drops" data-footer-action="info:contact">Contact</a></li>
+        <li><a href="#drops" data-footer-action="info:faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Brand</h4>
+      <ul>
+        <li><a href="#drops" data-footer-action="info:story">Our Story</a></li>
+        <li><a href="#drops" data-footer-action="info:sustainability">Sustainability</a></li>
+        <li><a href="#drops" data-footer-action="info:careers">Careers</a></li>
+        <li><a href="#drops" data-footer-action="info:press">Press</a></li>
+        <li><a href="#drops" data-footer-action="info:stockists">Stockists</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 OBS. All Rights Reserved.</span>
+    <span>ONLY BORN TO STAND OUT®</span>
+  </div>
+</footer>
+
+
+<!--
+  OBS PRODUCTION CONFIG:
+  This file is a complete front-end storefront and uses localStorage for cart/wishlist/order demo data.
+  For live payments, replace CONFIG.PAYSTACK_PUBLIC_KEY below with your Paystack public key and connect
+  the checkout request to your secure backend/serverless function. Never put a Paystack secret key in HTML.
+  Orders can be posted to CONFIG.ORDER_ENDPOINT when you have a backend.
+-->
+
+<script>
+  const CONFIG = {
+    currency: '₦',
+    shippingFlat: 4500,
+    freeShippingThreshold: 150000,
+    paystackPublicKey: '', // Add your public key for live Paystack checkout.
+    orderEndpoint: '',
+    supabaseUrl: 'https://szwplfkxrmcdopyflbej.supabase.co',
+    supabaseAnonKey: 'sb_publishable_6qOSOyYkvvlgkFLUGdtWLQ_VjnLwBWe'
+  };
+
+  const PRODUCTS = [
+    {id:'echo-hoodie',name:'Echo Hoodie',cat:'Hoodies',category:'hoodies',price:129000,garment:'hoodie',badge:'New',sizes:['S','M','L','XL','XXL'],colors:['Black','White'],description:'Heavyweight streetwear hoodie with an oversized silhouette, built for everyday outlier energy.',featured:1},
+    {id:'standout-tee',name:'Standout Tee',cat:'T-Shirts',category:'tees',price:59000,garment:'tee',badge:'',sizes:['S','M','L','XL','XXL'],colors:['Black','White','Gold'],description:'Premium heavyweight tee cut for a clean, bold streetwear fit.',featured:2},
+    {id:'outlier-bomber',name:'Outlier Bomber',cat:'Outerwear',category:'outerwear',price:219000,garment:'jacket',badge:'Hot',sizes:['M','L','XL','XXL'],colors:['Black'],description:'Structured bomber with an athletic profile and statement proportions.',featured:3},
+    {id:'drift-cargo',name:'Drift Cargo',cat:'Bottoms',category:'bottoms',price:149000,garment:'pants',badge:'',sizes:['30','32','34','36','38','40'],colors:['Black','Olive'],description:'Relaxed cargo silhouette with utility detailing and a baggy street fit.',featured:4},
+    {id:'obs-mid-shorts',name:'OBS Mid Shorts',cat:'Shorts',category:'shorts',price:89000,garment:'pants',badge:'New',sizes:['S','M','L','XL','XXL'],colors:['Black','White'],description:'Baggy mid-length shorts designed around the OBS street uniform.',featured:5},
+    {id:'onlyborn-cap',name:'Only Born Cap',cat:'Accessories',category:'accessories',price:45000,garment:'tee',badge:'',sizes:['OS'],colors:['Black','White'],description:'Minimal OBS cap finished with the Only Born To Stand Out identity.',featured:6}
+  ];
+
+  let cart = JSON.parse(localStorage.getItem('obs_cart') || '[]');
+
+  const $ = (s,root=document)=>root.querySelector(s);
+  const $$ = (s,root=document)=>[...root.querySelectorAll(s)];
+  const money = n => CONFIG.currency + Number(n).toLocaleString('en-NG');
+
+  function saveCart(){ localStorage.setItem('obs_cart',JSON.stringify(cart)); updateCartCount(); }
+  function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window._toast); window._toast=setTimeout(()=>t.classList.remove('show'),1800); }
+  function openDrawer(id){ const el=$('#'+id); el.classList.add('drawer-open'); el.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeDrawer(id){ const el=$('#'+id); el.classList.remove('drawer-open'); el.setAttribute('aria-hidden','true'); if(!document.querySelector('.drawer-open')) document.body.style.overflow=''; }
+
+  function garmentMarkup(type){ return `<div class="garment ${type}"></div>`; }
+
+  function renderProducts(list=PRODUCTS){
+    const grid=$('#productGrid'), empty=$('#emptyProducts');
+    grid.innerHTML=list.map(p=>`
+      <article class="product-card reveal visible" data-id="${p.id}" tabindex="0" aria-label="View ${p.name}">
+        <div class="product-img" data-product="${p.id}">
+          ${garmentMarkup(p.garment)}
+          ${p.badge?`<span class="badge">${p.badge}</span>`:''}
+          <button class="quick-add" data-quick="${p.id}">Quick Add</button>
+        </div>
+        <div class="product-info">
+          <div><span class="product-cat">${p.cat}</span><span class="product-name">${p.name}</span></div>
+          <span class="product-price">${money(p.price)}</span>
+        </div>
+      </article>`).join('');
+    empty.hidden=list.length>0;
+  }
+
+  function productById(id){ return PRODUCTS.find(p=>p.id===id); }
+
+  function renderDetail(id){
+    const p=productById(id); if(!p) return;
+    $('#productDetail').innerHTML=`
+      <div class="detail-visual">${garmentMarkup(p.garment)}${p.badge?`<span class="badge">${p.badge}</span>`:''}</div>
+      <div class="detail-copy">
+        <span class="product-cat">${p.cat}</span><h2>${p.name}</h2>
+        <div class="price">${money(p.price)}</div><p>${p.description}</p>
+        <label class="option-label">Size</label>
+        <div class="option-row" id="sizeOptions">${p.sizes.map((s,i)=>`<button class="option-btn ${i===0?'active':''}" data-size="${s}">${s}</button>`).join('')}</div>
+        <label class="option-label">Colour</label>
+        <div class="option-row" id="colorOptions">${p.colors.map((c,i)=>`<button class="option-btn ${i===0?'active':''}" data-color="${c}">${c}</button>`).join('')}</div>
+        <button class="btn primary-wide" id="detailAdd">Add to Cart — ${money(p.price)}</button>
+      </div>`;
+    $('#detailAdd').onclick=()=>{
+      const size=$('#sizeOptions .active')?.dataset.size || p.sizes[0];
+      const color=$('#colorOptions .active')?.dataset.color || p.colors[0];
+      addToCart(p.id,size,color); closeDrawer('productDrawer');
+    };
+    $$('#productDetail .option-btn').forEach(btn=>btn.onclick=()=>{
+      const parent=btn.parentElement; $$('.option-btn',parent).forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+    });
+    openDrawer('productDrawer');
+  }
+
+  function addToCart(id,size,color,qty=1){
+    const existing=cart.find(x=>x.id===id && x.size===size && x.color===color);
+    if(existing) existing.qty+=qty;
+    else cart.push({id,size,color,qty});
+    saveCart(); toast('Added to cart ✓');
+  }
+
+  function updateCartCount(){
+    const count=cart.reduce((a,x)=>a+x.qty,0);
+    const old=$('#cartCount'); if(old) old.remove();
+    const b=$('#cartBtn'); if(!b) return;
+    if(count) { const n=document.createElement('span'); n.id='cartCount'; n.className='cart-count'; n.textContent=count>99?'99+':count; b.appendChild(n); }
+    if($('#cartTitleCount')) $('#cartTitleCount').textContent=count?`(${count})`:'';
+  }
+
+  function cartTotals(){
+    const subtotal=cart.reduce((sum,x)=>{const p=productById(x.id);return sum+p.price*x.qty},0);
+    const shipping=subtotal===0?0:(subtotal>=CONFIG.freeShippingThreshold?0:CONFIG.shippingFlat);
+    return {subtotal,shipping,total:subtotal+shipping};
+  }
+
+  function renderCart(){
+    const body=$('#cartBody'), t=cartTotals();
+    if(!cart.length){
+      body.innerHTML=`<div style="padding:4rem 0;text-align:center;color:#777">Your cart is empty.<br><button class="btn" style="margin-top:1.5rem" onclick="closeDrawer('cartDrawer');document.querySelector('#drops').scrollIntoView({behavior:'smooth'})">Shop the Drop</button></div>`;
+      updateCartCount(); return;
+    }
+    body.innerHTML=`
+      ${cart.map((x,i)=>{const p=productById(x.id);return `
+        <div class="cart-item">
+          <div class="cart-thumb">${garmentMarkup(p.garment)}</div>
+          <div><h4>${p.name}</h4><small>${x.size} · ${x.color}</small>
+            <div class="qty-row"><button data-minus="${i}">−</button><span>${x.qty}</span><button data-plus="${i}">+</button></div>
+            <button class="remove-item" data-remove="${i}">Remove</button>
+          </div>
+          <div class="cart-item-price">${money(p.price*x.qty)}</div>
+        </div>`}).join('')}
+      <div class="cart-summary">
+        <div class="summary-line"><span>Subtotal</span><strong>${money(t.subtotal)}</strong></div>
+        <div class="summary-line"><span>Shipping</span><strong>${t.shipping?money(t.shipping):'FREE'}</strong></div>
+        <div class="summary-line total"><span>Total</span><strong>${money(t.total)}</strong></div>
+        <p class="checkout-note">${t.shipping?'Free shipping on orders over '+money(CONFIG.freeShippingThreshold)+'.':'You unlocked free shipping.'}</p>
+        <button class="btn primary-wide" id="startCheckout">Checkout</button>
+        <div class="checkout" id="checkoutPanel" hidden>
+          <h3 class="checkout-title">Delivery & Payment</h3>
+          <form id="checkoutForm">
+            <div class="checkout-grid">
+              <input class="field" name="firstName" placeholder="First name" required>
+              <input class="field" name="lastName" placeholder="Last name" required>
+              <input class="field full" type="email" name="email" placeholder="Email address" required>
+              <input class="field full" name="phone" placeholder="Phone number" required>
+              <input class="field full" name="address" placeholder="Delivery address" required>
+              <input class="field" name="city" placeholder="City" required>
+              <input class="field" name="state" placeholder="State" required>
+              <select class="field full" name="country"><option>Nigeria</option><option>Ghana</option><option>United Kingdom</option><option>United States</option></select>
+            </div>
+            <label class="option-label">Payment method</label>
+            <div class="payment-methods">
+              <button type="button" class="payment-method active" data-payment="paystack">Paystack</button>
+              <button type="button" class="payment-method" data-payment="transfer">Bank Transfer</button>
+            </div>
+            <button class="btn primary-wide" type="submit">Place Order — ${money(t.total)}</button>
+            <p class="checkout-note">For live payments, connect the Paystack public key and a secure order backend in CONFIG above.</p>
+          </form>
+        </div>
+      </div>`;
+    $$('#cartBody [data-minus]').forEach(b=>b.onclick=()=>changeQty(+b.dataset.minus,-1));
+    $$('#cartBody [data-plus]').forEach(b=>b.onclick=()=>changeQty(+b.dataset.plus,1));
+    $$('#cartBody [data-remove]').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.remove,1);saveCart();renderCart();});
+    $('#startCheckout').onclick=()=>{ $('#checkoutPanel').hidden=false; $('#startCheckout').hidden=true; };
+    $$('.payment-method').forEach(b=>b.onclick=()=>{$$('.payment-method').forEach(x=>x.classList.remove('active'));b.classList.add('active');});
+    $('#checkoutForm').onsubmit=submitOrder;
+    updateCartCount();
+  }
+
+  function changeQty(i,delta){ cart[i].qty+=delta; if(cart[i].qty<1) cart.splice(i,1); saveCart(); renderCart(); }
+
+  // Paystack inline helper. Returns a Promise that resolves with the Paystack response
+  // (or rejects with a real error). Loads the official script on demand if missing.
+  function loadPaystackScript(){
+    return new Promise((resolve,reject)=>{
+      if(window.PaystackPop) return resolve(window.PaystackPop);
+      const s=document.createElement('script');
+      s.src='https://js.paystack.co/v1/inline.js';
+      s.onload=()=>window.PaystackPop?resolve(window.PaystackPop):reject(new Error('Paystack failed to load'));
+      s.onerror=()=>reject(new Error('Paystack script could not load'));
+      document.head.appendChild(s);
+    });
+  }
+  function payWithPaystack({email,amount,reference,onSuccess,onClose,metadata}){
+    if(!CONFIG.paystackPublicKey){onClose&&onClose();return Promise.reject(new Error('Paystack public key not configured. Add CONFIG.paystackPublicKey in the script.'));}
+    return loadPaystackScript().then(PaystackPop=>new Promise((resolve,reject)=>{
+      const handler=PaystackPop.setup({
+        key:CONFIG.paystackPublicKey,
+        email, amount:Math.round(amount*100), currency:'NGN', ref:reference, metadata:metadata||{},
+        callback:function(response){onSuccess&&onSuccess(response);resolve(response);},
+        onClose:function(){onClose&&onClose();reject(new Error('Payment cancelled'));}
+      });
+      handler.openIframe();
+    }));
+  }
+
+  async function submitOrder(e){
+    e.preventDefault();
+    if(!currentUser){openAccount();return;}
+    if(!supabaseClient){toast('Database unavailable');return;}
+    const data=Object.fromEntries(new FormData(e.target).entries());
+    const totals=cartTotals();
+    const payment=$('.payment-method.active')?.dataset.payment || 'transfer';
+    const orderNumber='OBS-'+Date.now().toString().slice(-8);
+
+    // Paystack flow: open checkout first, only persist order after a successful charge.
+    if(payment==='paystack' && CONFIG.paystackPublicKey){
+      try{
+        const res=await payWithPaystack({
+          email:currentUser.email,
+          amount:totals.total,
+          reference:orderNumber,
+          metadata:{first_name:data.firstName,last_name:data.lastName,phone:data.phone,cart:JSON.stringify(cart)}
+        });
+        await persistOrder({data,orderNumber,reference:res?.reference||orderNumber,status:'processing',payment,totals});
+      }catch(err){
+        if(String(err?.message||'').toLowerCase().includes('cancel')){
+          toast('Payment cancelled');
+        }else{
+          toast(err?.message||'Payment failed');
+        }
+      }
+      return;
+    }
+
+    // Bank transfer or no Paystack key configured: create the order with status=pending_payment.
+    await persistOrder({data,orderNumber,reference:null,status:payment==='transfer'?'pending_payment':'processing',payment,totals});
+  }
+
+  async function persistOrder({data,orderNumber,reference,status,payment,totals}){
+    if(!supabaseClient){toast('Database unavailable');return;}
+    const {data:order,error}=await supabaseClient.from('orders').insert({
+      user_id:currentUser.id, order_number:orderNumber, status, payment_method:payment,
+      payment_reference:reference, subtotal:totals.subtotal, shipping_amount:totals.shipping, total_amount:totals.total,
+      customer_email:currentUser.email, shipping_address:data.address, shipping_city:data.city, shipping_state:data.state, shipping_country:data.country, shipping_phone:data.phone
+    }).select().single();
+    if(error){toast(error.message||'Could not create order');return;}
+    const items=cart.map(x=>{const p=productById(x.id);return {order_id:order.id,product_id:x.id,product_name:p.name,quantity:x.qty,unit_price:p.price,size:x.size,color:x.color};});
+    const {error:itemError}=await supabaseClient.from('order_items').insert(items);
+    if(itemError){toast('Order created but items could not be saved.');return;}
+    cart=[];saveCart();renderCart();toast('Order placed ✓');
+    setTimeout(()=>{closeDrawer('cartDrawer');openAccount();},350);
+  }
+
+  function filterProducts(category='all'){
+    $$('.filter-tab').forEach(b=>b.classList.toggle('active',b.dataset.category===category));
+    const list=category==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===category || (category==='new'&&p.badge));
+    renderProducts(list);
+  }
+
+  function sortProducts(){
+    const selected=$('#sortProducts').value;
+    let list=[...PRODUCTS];
+    const active=$('.filter-tab.active')?.dataset.category||'all';
+    if(active!=='all') list=list.filter(p=>p.category===active||(active==='new'&&p.badge));
+    if(selected==='price-low') list.sort((a,b)=>a.price-b.price);
+    if(selected==='price-high') list.sort((a,b)=>b.price-a.price);
+    if(selected==='name') list.sort((a,b)=>a.name.localeCompare(b.name));
+    if(selected==='featured') list.sort((a,b)=>a.featured-b.featured);
+    renderProducts(list);
+  }
+
+  function openSearch(){
+    $('#searchOverlay').classList.add('open'); $('#searchOverlay').setAttribute('aria-hidden','false');
+    setTimeout(()=>$('#searchInput').focus(),50); renderSearch('');
+  }
+  function renderSearch(q){
+    const term=q.trim().toLowerCase();
+    const list=PRODUCTS.filter(p=>!term || [p.name,p.cat,p.category,p.description].join(' ').toLowerCase().includes(term));
+    $('#searchResults').innerHTML=list.map(p=>`<div class="search-result" data-search-product="${p.id}"><strong>${p.name}</strong><div style="color:#777;font-size:11px;margin-top:.3rem">${p.cat} · ${money(p.price)}</div></div>`).join('') || '<div style="color:#777">No matches.</div>';
+    $$('#searchResults [data-search-product]').forEach(x=>x.onclick=()=>{ $('#searchOverlay').classList.remove('open'); renderDetail(x.dataset.searchProduct); });
+  }
+
+  // Robust navigation: use explicit scrolling so anchors work reliably in Chrome/mobile.
+  function goToSection(id){
+    const el=document.getElementById(id);
+    if(!el)return;
+    menuToggle?.classList.remove('open');
+    navMenu?.classList.remove('open');
+    const headerH=header?.offsetHeight||0;
+    const y=el.getBoundingClientRect().top+window.scrollY-headerH-10;
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+  }
+
+  // Header behavior
+  const header=$('#siteHeader');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>40));
+
+  // Mobile menu
+  const menuToggle=$('#menuToggle'), navMenu=$('#navMenu');
+  menuToggle.addEventListener('click',()=>{menuToggle.classList.toggle('open');navMenu.classList.toggle('open');});
+  $$('#navMenu a').forEach(link=>link.addEventListener('click',e=>{
+    const href=link.getAttribute('href')||'';
+    if(href.startsWith('#') && href.length>1){ e.preventDefault(); goToSection(href.slice(1)); }
+    menuToggle.classList.remove('open'); navMenu.classList.remove('open');
+  }));
+
+  // Reveal animation
+  const revealEls=$$('.reveal');
+  const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.15});
+  revealEls.forEach(el=>revealObserver.observe(el));
+
+  // Animated stats
+  const counters=$$('.stat-num');
+  const counterObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting)return; const el=entry.target,target=parseInt(el.dataset.target,10),duration=1600,start=performance.now();
+    const animate=now=>{const progress=Math.min((now-start)/duration,1),eased=1-Math.pow(1-progress,3);el.textContent=Math.floor(eased*target)+(target>=100?'K+':'+');if(progress<1)requestAnimationFrame(animate);};
+    requestAnimationFrame(animate);counterObserver.unobserve(el);
+  }),{threshold:.5});
+  counters.forEach(c=>counterObserver.observe(c));
+
+  // Product interactions
+  renderProducts();
+  $('#productGrid').addEventListener('click',e=>{
+    const quick=e.target.closest('[data-quick]');
+    if(quick){e.stopPropagation();const p=productById(quick.dataset.quick);addToCart(p.id,p.sizes[0],p.colors[0]);quick.textContent='Added ✓';setTimeout(()=>quick.textContent='Quick Add',1400);return;}
+    const card=e.target.closest('[data-id]'); if(card) renderDetail(card.dataset.id);
+  });
+  $('#productGrid').addEventListener('keydown',e=>{if(e.key==='Enter'){const card=e.target.closest('[data-id]');if(card)renderDetail(card.dataset.id)}});
+
+  // Filters/sort
+  $$('.filter-tab').forEach(b=>b.onclick=()=>filterProducts(b.dataset.category));
+  $('#sortProducts').onchange=sortProducts;
+
+  // Search and cart
+  $('#searchBtn').onclick=openSearch;
+  $('#closeSearch').onclick=()=>$('#searchOverlay').classList.remove('open');
+  $('#searchInput').oninput=e=>renderSearch(e.target.value);
+  $('#cartBtn').onclick=()=>{renderCart();openDrawer('cartDrawer');};
+  $$('[data-close]').forEach(el=>el.onclick=()=>closeDrawer(el.dataset.close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer('cartDrawer');closeDrawer('productDrawer');closeDrawer('accountDrawer');closeDrawer('adminDrawer');$('#searchOverlay').classList.remove('open');}});
+
+  // Newsletter → Supabase
+  $('#newsletterForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const email=$('#emailInput').value.trim();
+    const msg=$('#formMsg');
+    const valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){msg.textContent='Please enter a valid email address.';msg.style.color='#7a0000';return;}
+    // Persist locally as a fallback even if Supabase is unavailable
+    const subs=JSON.parse(localStorage.getItem('obs_subscribers')||'[]');
+    if(!subs.includes(email))subs.push(email);
+    localStorage.setItem('obs_subscribers',JSON.stringify(subs));
+    if(!supabaseClient){msg.textContent='Saved locally — we will sync to OBS when the database is back.';msg.style.color='#000';$('#emailInput').value='';return;}
+    const submitBtn=$('#newsletterForm button[type="submit"]');
+    submitBtn.disabled=true; submitBtn.textContent='Joining…';
+    try{
+      const {error}=await supabaseClient.from('newsletter_subscribers').upsert({email},{onConflict:'email'});
+      if(error) throw error;
+      msg.textContent='Welcome to the inner circle. Check your inbox.'; msg.style.color='#000';
+      $('#emailInput').value='';
+    }catch(ex){
+      msg.textContent='Saved locally — we will retry sync shortly.'; msg.style.color='#000';
+    }finally{submitBtn.disabled=false; submitBtn.textContent='Subscribe';}
+  });
+
+  // Hero parallax
+  const obsLogo=$('.obs-logo-wrap');
+  window.addEventListener('scroll',()=>{if(obsLogo&&window.scrollY<window.innerHeight)obsLogo.style.transform=`translateY(${window.scrollY*.15}px)`;});
+
+  // Footer mini-pages / policies in this single-file prototype
+  const INFO={
+    shipping:'Shipping: Nigeria delivery is estimated at 2–7 business days. International delivery times vary by destination. Free shipping applies above the configured threshold.',
+    returns:'Returns: Unworn items should be returned in original condition within 14 days. Replace this policy with your final legal policy before launch.',
+    size:'Size Guide: Tees/hoodies use S–XXL. Bottoms use numeric waist sizes. Add your exact garment measurements here before launch.',
+    contact:'Contact: Add your official OBS email, WhatsApp number and customer-service hours here.',
+    faq:'FAQ: Orders, sizing, shipping, returns and care information should be published here before launch.',
+    story:'Our Story: OBS — Only Born To Stand Out — is streetwear built around individuality, confidence and refusing to blend in.',
+    sustainability:'Sustainability: Add your verified materials, manufacturing and packaging commitments here.',
+    careers:'Careers: Add current openings and an application email here.',
+    press:'Press: Add your press contact and media kit here.',
+    stockists:'Stockists: Add approved physical and online stockists here.'
+  };
+  $$('[data-footer-action]').forEach(a=>a.onclick=(e)=>{e.preventDefault();const action=a.dataset.footerAction;if(action.startsWith('filter:')){filterProducts(action.split(':')[1]);document.querySelector('#drops').scrollIntoView({behavior:'smooth'});}else{alert(INFO[action.split(':')[1]]||'OBS information page.');}});
+
+
+  // ================= SUPABASE =================
+  const supabaseClient = (window.supabase && CONFIG.supabaseUrl && CONFIG.supabaseAnonKey)
+    ? window.supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey) : null;
+
+  // ================= ACCOUNT / AUTHENTICATION =================
+  let currentUser=null;
+  let authMode='signup';
+
+  const passwordStrong = p => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,72}$/.test(p);
+  function updateAccountUI(){
+    const b=$('#accountBtn'); if(!b)return;
+    b.querySelector('.logged-badge')?.remove();
+    if(currentUser){const n=document.createElement('span');n.className='logged-badge';n.textContent='✓';b.appendChild(n);}
+  }
+  function switchAuth(mode){
+    authMode=mode;
+    $$('.auth-tab').forEach(b=>b.classList.toggle('active',b.dataset.auth===mode));
+    $('#nameFields').hidden=mode==='login'; $('#confirmPassword').hidden=mode==='login';
+    $('#passwordRules').hidden=mode==='login';
+    $('#authSubmit').textContent=mode==='login'?'Login':'Create Account';
+    $('#authIntro').textContent=mode==='login'?'Login to view your account and track your OBS orders.':'Create your OBS account to save your orders and track every purchase.';
+    $('#forgotPasswordBtn').hidden=mode!=='login';
+    $('#authError').textContent=''; $('#authForm').reset();
+  }
+  function isAdmin(){
+    if(!currentUser) return false;
+    const meta=currentUser.user_metadata||{};
+    const role=meta.role || meta.user_role;
+    if(role && String(role).toLowerCase()==='admin') return true;
+    if(Array.isArray(meta.roles) && meta.roles.map(r=>String(r).toLowerCase()).includes('admin')) return true;
+    if(currentUser.app_metadata && currentUser.app_metadata.role==='admin') return true;
+    return false;
+  }
+  async function loadCurrentUser(){
+    if(!supabaseClient)return;
+    const {data}=await supabaseClient.auth.getUser();
+    currentUser=data?.user||null;
+    updateAccountUI();
+  }
+  async function openAccount(){
+    if(!supabaseClient){$('#authError').textContent='Authentication service is unavailable.';openDrawer('accountDrawer');return;}
+    await loadCurrentUser();
+    // Detect password recovery link (Supabase returns the recovery session in the URL hash).
+    const hash=window.location.hash||'';
+    if(hash.includes('type=recovery')){
+      showAccountView('reset'); openDrawer('accountDrawer'); return;
+    }
+    if(currentUser){
+      $('#authView').hidden=true; $('#forgotView').hidden=true; $('#resetView').hidden=true;
+      $('#accountView').hidden=false; $('#accountTitle').textContent='My Account';
+      const meta=currentUser.user_metadata||{};
+      const fullName=[meta.first_name,meta.last_name].filter(Boolean).join(' ').trim();
+      $('#memberName').textContent=fullName||'OBS Member';
+      $('#memberEmail').textContent=currentUser.email||'';
+      $('#historyView').hidden=true; $('#orderDetailView').hidden=true;
+      document.querySelectorAll('#accountView .account-actions').forEach(x=>{if(x.id!=='adminActions')x.hidden=false;});
+      $('#adminActions').hidden=!isAdmin();
+    }else{
+      $('#accountView').hidden=true; $('#forgotView').hidden=true; $('#resetView').hidden=true;
+      $('#authView').hidden=false; $('#accountTitle').textContent='Join OBS'; switchAuth('signup');
+    }
+    openDrawer('accountDrawer');
+  }
+  function showAccountView(which){
+    $('#authView').hidden=which!=='auth';
+    $('#forgotView').hidden=which!=='forgot';
+    $('#resetView').hidden=which!=='reset';
+    $('#accountView').hidden=true;
+  }
+  async function renderHistory(){
+    const box=$('#orderHistoryList');
+    if(!currentUser){box.innerHTML='<div class=\"account-empty\">Please log in first.</div>';return;}
+    const {data,error}=await supabaseClient.from('orders').select('id,order_number,status,total_amount,created_at,payment_method').eq('user_id',currentUser.id).order('created_at',{ascending:false});
+    if(error){box.innerHTML='<div class=\"account-empty\">Unable to load orders right now.</div>';return;}
+    if(!data?.length){box.innerHTML='<div class=\"account-empty\">No orders yet.<br>When you shop with your OBS account, your orders will appear here.</div>';return;}
+    box.innerHTML=data.map(o=>{const status=(o.status||'processing').toLowerCase();const progress=status==='delivered'?100:status==='shipped'?70:status==='processing'?40:20;return `<div class=\"order-card\" data-order-id=\"${o.id}\" role=\"button\" tabindex=\"0\" style=\"cursor:pointer\"><div class=\"order-top\"><div><div class=\"order-id\">${o.order_number||o.id}</div><div class=\"order-date\">${new Date(o.created_at).toLocaleDateString('en-NG',{year:'numeric',month:'short',day:'numeric'})}</div></div><span class=\"order-status\">${status}</span></div><div class=\"order-total\"><span>Total</span><span>${money(o.total_amount||0)}</span>${o.payment_method?`<span class=\"pay-badge ${o.payment_method==='paystack'?'paystack':''}\">${o.payment_method}</span>`:''}</div><div class=\"order-track\"><span style=\"width:${progress}%\"></span></div><div class=\"text-btn\" style=\"margin-top:.5rem;display:block\">Track order →</div></div>`}).join('');
+    $$('#orderHistoryList [data-order-id]').forEach(card=>{
+      card.onclick=()=>renderOrderDetail(card.dataset.orderId);
+      card.onkeydown=(e)=>{if(e.key==='Enter')renderOrderDetail(card.dataset.orderId);};
+    });
+  }
+
+  async function renderOrderDetail(orderId){
+    if(!supabaseClient||!currentUser)return;
+    const {data:order,error}=await supabaseClient.from('orders').select('*').eq('id',orderId).eq('user_id',currentUser.id).maybeSingle();
+    if(error||!order){toast('Unable to load order');return;}
+    const {data:items}=await supabaseClient.from('order_items').select('*').eq('order_id',orderId);
+    const steps=[
+      {key:'processing',label:'Processing'},
+      {key:'shipped',label:'Shipped'},
+      {key:'out_for_delivery',label:'Out for Delivery'},
+      {key:'delivered',label:'Delivered'}
+    ];
+    const currentIdx=Math.max(0,steps.findIndex(s=>s.key===(order.status||'processing')));
+    const timeline=steps.map((s,i)=>`<div class=\"status-step ${i<currentIdx?'done':''} ${i===currentIdx?'current':''}\">${s.label}</div>`).join('');
+    const itemsHtml=(items||[]).map(it=>`<div class=\"oi-row\"><span>${it.product_name} <small style=\"color:#666\">· ${it.size||''} ${it.color||''} · ×${it.quantity}</small></span><span>${money(it.unit_price*it.quantity)}</span></div>`).join('')||'<div style=\"color:#777;font-size:11px\">No items recorded.</div>';
+    $('#orderDetailTitle').textContent=order.order_number||('Order #'+order.id.slice(0,8));
+    $('#orderDetailBody').innerHTML=`
+      <div class=\"order-top\"><div><div class=\"order-id\">${order.order_number||order.id}</div><div class=\"order-date\">Placed ${new Date(order.created_at).toLocaleString('en-NG')}</div></div><span class=\"order-status\">${order.status||'processing'}</span></div>
+      <div class=\"status-timeline\">${timeline}</div>
+      <div class=\"order-meta\">
+        <strong style=\"color:#fff\">Shipping to</strong><br>
+        ${order.shipping_address||''}<br>
+        ${order.shipping_city||''}${order.shipping_state?', '+order.shipping_state:''} ${order.shipping_country||''}<br>
+        ${order.shipping_phone?order.shipping_phone+'<br>':''}
+        ${order.customer_email||''}
+      </div>
+      <div class=\"order-items-list\"><div style=\"font-size:10px;letter-spacing:.2em;color:#888;text-transform:uppercase;margin-bottom:.5rem\">Items</div>${itemsHtml}</div>
+      <div class=\"order-total\"><span>Subtotal</span><span>${money(order.subtotal||0)}</span></div>
+      <div class=\"order-total\"><span>Shipping</span><span>${order.shipping_amount?money(order.shipping_amount):'FREE'}</span></div>
+      <div class=\"order-total\" style=\"font-size:14px;margin-top:.6rem;border-top:1px solid #333;padding-top:.6rem\"><span>Total</span><span>${money(order.total_amount||0)}</span></div>
+      <div style=\"margin-top:.6rem;font-size:10px;color:#888\">Payment: <span class=\"pay-badge ${order.payment_method==='paystack'?'paystack':''}\">${order.payment_method||'transfer'}</span></div>
+    `;
+    $('#historyView').hidden=true; $('#orderDetailView').hidden=false;
+  }
+
+  // ===== Admin order management =====
+  const ADMIN_STATUSES=['processing','shipped','out_for_delivery','delivered','cancelled'];
+  async function openAdmin(){
+    if(!isAdmin()){toast('Admin access only');return;}
+    if(!supabaseClient)return;
+    openDrawer('adminDrawer');
+    const box=$('#adminOrderList'); box.textContent='Loading…';
+    const {data,error}=await supabaseClient.from('orders').select('id,order_number,status,total_amount,created_at,customer_email,shipping_city,shipping_country,payment_method').order('created_at',{ascending:false}).limit(100);
+    if(error){box.innerHTML='<div class=\"account-empty\">'+error.message+'</div>';return;}
+    if(!data?.length){box.innerHTML='<div class=\"account-empty\">No orders yet.</div>';return;}
+    box.innerHTML=data.map(o=>`<div class=\"admin-row\" data-admin-order=\"${o.id}\"><div class=\"order-top\"><div><div class=\"order-id\">${o.order_number||o.id.slice(0,8)}</div><div class=\"order-date\">${new Date(o.created_at).toLocaleString('en-NG')} · ${o.customer_email||''}</div></div><span class=\"order-status\">${o.status||'processing'}</span></div><div class=\"order-total\"><span>Total</span><span>${money(o.total_amount||0)}</span><span class=\"pay-badge ${o.payment_method==='paystack'?'paystack':''}\">${o.payment_method||'transfer'}</span></div><div class=\"order-meta\">Ship to: ${[o.shipping_city,o.shipping_country].filter(Boolean).join(', ')||'—'}</div><select data-status>${ADMIN_STATUSES.map(s=>`<option value=\"${s}\" ${s===(o.status||'processing')?'selected':''}>${s.replace(/_/g,' ')}</option>`).join('')}</select><button class=\"admin-update\" data-update=\"${o.id}\">Update Status</button></div>`).join('');
+    $$('#adminOrderList [data-update]').forEach(b=>b.onclick=async()=>{
+      const id=b.dataset.update; const row=b.closest('[data-admin-order]'); const status=row.querySelector('[data-status]').value;
+      b.disabled=true; b.textContent='Updating…';
+      const {error}=await supabaseClient.from('orders').update({status,updated_at:new Date().toISOString()}).eq('id',id);
+      b.disabled=false; b.textContent='Update Status';
+      if(error){toast(error.message||'Update failed');return;}
+      toast('Status updated ✓');
+      row.querySelector('.order-status').textContent=status;
+    });
+  }
+  $$('.auth-tab').forEach(b=>b.onclick=()=>switchAuth(b.dataset.auth));
+  $('#forgotPasswordBtn').onclick=()=>{showAccountView('forgot');$('#forgotError').textContent='';$('#forgotForm').reset();};
+  $('#backToAuth').onclick=()=>showAccountView('auth');
+  $('#adminBtn').onclick=openAdmin;
+  $('#backHistory').onclick=()=>{$('#orderDetailView').hidden=true;$('#historyView').hidden=false;};
+  $('#forgotForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const email=String(new FormData(e.target).get('email')||'').trim().toLowerCase();
+    const err=$('#forgotError'); err.textContent='';
+    if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Enter a valid email address.';return;}
+    if(!supabaseClient){err.textContent='Authentication service is unavailable.';return;}
+    const btn=$('#forgotSubmit'); btn.disabled=true; btn.textContent='Sending…';
+    try{
+      const redirectTo=window.location.origin+window.location.pathname;
+      const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo});
+      if(error)throw error;
+      err.style.color='#9cff9c';
+      err.textContent='Reset link sent. Check your inbox (and spam folder).';
+    }catch(ex){err.textContent=ex?.message||'Unable to send reset link.';err.style.color='';}
+    finally{btn.disabled=false;btn.textContent='Send Reset Link';}
+  });
+  $('#resetForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const f=new FormData(e.target);
+    const password=String(f.get('password')||'');
+    const confirm=String(f.get('confirmPassword')||'');
+    const err=$('#resetError'); err.textContent='';
+    if(!passwordStrong(password)){err.textContent='Password must be 8+ characters with uppercase, lowercase, a number and a symbol.';return;}
+    if(password!==confirm){err.textContent='Passwords do not match.';return;}
+    if(!supabaseClient){err.textContent='Authentication service is unavailable.';return;}
+    const btn=$('#resetSubmit'); btn.disabled=true; btn.textContent='Updating…';
+    try{
+      const {data,error}=await supabaseClient.auth.updateUser({password});
+      if(error)throw error;
+      toast('Password updated ✓');
+      // Clear recovery hash and reopen account
+      history.replaceState(null,'',window.location.pathname+window.location.search);
+      await openAccount();
+    }catch(ex){err.textContent=ex?.message||'Unable to update password.';}
+    finally{btn.disabled=false;btn.textContent='Update Password';}
+  });
+  $('#authForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const f=new FormData(e.target),email=String(f.get('email')||'').trim().toLowerCase(),password=String(f.get('password')||''),err=$('#authError');
+    err.textContent=''; err.style.color='';
+    if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Enter a valid email address.';return;}
+    if(!supabaseClient){err.textContent='Authentication service is unavailable.';return;}
+    $('#authSubmit').disabled=true;
+    try{
+      if(authMode==='signup'){
+        if(!passwordStrong(password)){err.textContent='Password must be 8+ characters and include uppercase, lowercase, a number and a symbol.';return;}
+        if(password!==String(f.get('confirmPassword')||'')){err.textContent='Passwords do not match.';return;}
+        const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{first_name:String(f.get('firstName')||'').trim(),last_name:String(f.get('lastName')||'').trim()}}});
+        if(error)throw error;
+        if(data.session){currentUser=data.user;toast('Account created ✓');closeDrawer('accountDrawer');}
+        else {err.style.color='#9cff9c';err.textContent='Account created. Check your email to confirm your account, then log in.';}
+      }else{
+        const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+        if(error)throw error; currentUser=data.user; toast('Welcome back ✓'); closeDrawer('accountDrawer');
+      }
+      updateAccountUI();
+    }catch(ex){err.textContent=ex?.message||'Unable to complete authentication.';}
+    finally{$('#authSubmit').disabled=false;}
+  });
+  $('#accountBtn').onclick=openAccount;
+  $('#joinUsLink').onclick=e=>{e.preventDefault();openAccount();};
+  $('#historyBtn').onclick=async()=>{$('#historyView').hidden=false;await renderHistory();};
+  $('#backAccount').onclick=()=>{$('#historyView').hidden=true;};
+  $('#logoutBtn').onclick=async()=>{if(supabaseClient)await supabaseClient.auth.signOut();currentUser=null;updateAccountUI();toast('Logged out');closeDrawer('accountDrawer');};
+  supabaseClient?.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;updateAccountUI();});
+  loadCurrentUser();
+
+  // Require login before checkout.
+  document.addEventListener('click',e=>{
+    if(e.target?.id==='startCheckout' && !currentUser){e.preventDefault();e.stopImmediatePropagation();closeDrawer('cartDrawer');openAccount();}
+  },true);
+
+  // Keep the reference-inspired OBS wordmark clean: no tagline underneath.
+  $('.obs-motto')?.remove();
+
+  updateCartCount();
+  // Final navigation safety net for Chrome/file:// and mobile browsers.
+  document.addEventListener('click',e=>{
+    const link=e.target.closest('#navMenu a[href^="#"]');
+    if(!link || link.id==='joinUsLink')return;
+    const id=link.getAttribute('href').slice(1);
+    if(document.getElementById(id)){e.preventDefault();goToSection(id);}
+  });
+
+</script>
+
+</body>
+</html>
